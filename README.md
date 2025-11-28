@@ -1,4 +1,4 @@
-# 🤖 Multi-Tool AI Assistant
+<h1 align="center"> 🤖 Multi-Tool AI Assistant </h1>
 
 <p align="center">
    <img src="assets/home.png" alt="Assistant home screenshot" width="700" />
@@ -52,4 +52,5 @@ streamlit run app.py
 ```
 
 Open `http://localhost:8501` in your browser.
+
 
