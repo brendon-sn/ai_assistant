@@ -1,7 +1,5 @@
 # 🤖 Multi-Tool AI Assistant
 
-Technical challenge - Junior AI Engineer position
-
 <img src="assets/home.png" alt="Assistant home screenshot" width="700" />
 
 ## Objective
@@ -50,4 +48,5 @@ AZURE_API_VERSION=2024-06-01
 ```powershell
 streamlit run app.py
 ```
+
 Open `http://localhost:8501` in your browser.
