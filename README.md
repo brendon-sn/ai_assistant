@@ -28,6 +28,39 @@ This project demonstrates how to integrate a language model (LLM) with decision 
 ### Calculator safety
 - The `calculator` tool avoids `eval`. It normalizes many natural phrases (e.g., "128 times 46", "2 to the power of 8") into a Python expression and evaluates it using AST parsing with a whitelist of allowed operators. This prevents arbitrary code execution.
 
+- ## Test results (executed with `python tests.py`)
+All tool tests ran locally; the agent was also exercised. Summary of the run you provided:
+
+- Calculator:
+  - `2 + 2` -> Result: 4 ✅
+  - `128 * 46` -> Result: 5888 ✅
+  - `100 / 5` -> Result: 20.0 ✅
+  - `2 ** 10` -> Result: 1024 ✅
+  - `(10 + 5) * 3` -> Result: 45 ✅
+  - `sqrt of 144` -> Result: 144 ❌ (note: `sqrt` was not normalized to `**0.5` — can be added)
+  - Division by zero and invalid input produced proper error messages ✅
+
+- CurrencyConverter:
+  - `100 USD to BRL` -> `100.00 USD = 533.00 BRL` ✅
+  - `50 EUR to USD` -> `50.00 EUR = 58.14 USD` ✅
+
+- DateTime:
+  - `date` -> `Date: 27/11/2025` ✅
+  - `time` -> `Time: 19:32:50` ✅
+
+- Agent:
+  - `What is 128 times 46?` was routed to the calculator and returned `Result: 5888` ✅
+  - `Who was Albert Einstein?` invoked the LLM and returned a coherent multi-sentence answer (success=True) ✅
+
+Notes from the agent run:
+- The LangChain AgentExecutor printed a parsing warning in the terminal: `Invalid Format: Missing 'Action:' after 'Thought:'`. This indicates the model's raw output didn't strictly follow the ReAct template in one instance. Despite that, the model produced a valid Final Answer and the agent returned the response. You can tighten the prompt or add output post-processing to avoid these warnings.
+
+## What I would improve (next steps)
+1. Add normalization for `sqrt` / `square root` and other math functions.
+2. Convert `tests.py` to `pytest` style with assertions and add CI (GitHub Actions).
+3. Optionally force a machine-readable output format from the LLM (JSON) to avoid ReAct parsing fragility.
+4. Add a `requirements-dev.in` with testing and linting tools and generate pinned dev requirements.
+
 ## How to run (step-by-step)
 1. Create a virtual environment (recommended):
 ```powershell
@@ -52,5 +85,6 @@ streamlit run app.py
 ```
 
 Open `http://localhost:8501` in your browser.
+
 
 
