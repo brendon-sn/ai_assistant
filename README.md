@@ -1,6 +1,8 @@
 # 🤖 Multi-Tool AI Assistant
 
-<img src="assets/home.png" alt="Assistant home screenshot" width="700" />
+<p align="center">
+   <img src="assets/home.png" alt="Assistant home screenshot" width="700" />
+</p>
 
 ## Objective
 This project demonstrates how to integrate a language model (LLM) with decision logic to:
@@ -50,3 +52,4 @@ streamlit run app.py
 ```
 
 Open `http://localhost:8501` in your browser.
+
